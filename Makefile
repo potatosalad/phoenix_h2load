@@ -51,7 +51,7 @@ gen_verbose = $(gen_verbose_$(V))
 
 # Targets.
 
-all:: cowboy1-h1-test cowboy2-h1-test cowboy2-h2-test
+all:: cowboy2-h2-test cowboy2-h1-test cowboy1-h1-test
 
 cowboy1-build:
 	$(gen_verbose) docker build -f Dockerfile.cowboy1 -t phoenix_h2load:cowboy1 .
