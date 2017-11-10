@@ -35,6 +35,7 @@ defmodule PhoenixH2load.Mixfile do
     cowboy_version =
       case System.get_env("COWBOY_VERSION") do
         "1" <> _ -> {:cowboy, "~> 1.0"}
+        "2-pre" <> _ -> {:cowboy, github: "ninenines/cowboy", ref: "2.0.0-rc.1", override: true}
         _ -> {:cowboy, github: "ninenines/cowboy", override: true}
       end
     [
@@ -48,6 +49,7 @@ defmodule PhoenixH2load.Mixfile do
   defp lockfile() do
     case System.get_env("COWBOY_VERSION") do
       "1" <> _ -> "mix-cowboy1.lock"
+      "2-pre" <> _ -> "mix-cowboy2-pre.lock"
       _ -> "mix.lock"
     end
   end

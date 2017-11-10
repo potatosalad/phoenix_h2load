@@ -24,13 +24,13 @@ RUN apk --no-cache upgrade \
 RUN mix local.hex --force \
     && mix local.rebar --force
 
-ENV MIX_ENV=prod PORT=29595 COWBOY_VERSION=1
+ENV MIX_ENV=prod PORT=29595 COWBOY_VERSION=2-pre
 
 COPY config config
 COPY lib lib
 COPY priv priv
 COPY src src
-COPY mix.exs mix-cowboy1.lock ./
+COPY mix.exs mix-cowboy2-pre.lock ./
 RUN mix do deps.get, deps.compile, compile
 
 CMD ["elixir", "--erl", "+K true", "-S", "mix", "phx.server"]

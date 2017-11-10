@@ -11,8 +11,11 @@ notifications:
 before_install:
   - make cowboy1-build
   - make cowboy2-build
+  - make cowboy2-pre-build
 
 script:
+  - make cowboy2-pre-h2-test
+  - make cowboy2-pre-h1-test
   - make cowboy2-h2-test
   - make cowboy2-h1-test
   - make cowboy1-h1-test

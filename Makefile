@@ -51,7 +51,7 @@ gen_verbose = $(gen_verbose_$(V))
 
 # Targets.
 
-all:: cowboy2-h2-test cowboy2-h1-test cowboy1-h1-test
+all:: cowboy2-pre-h2-test cowboy2-pre-h1-test cowboy2-h2-test cowboy2-h1-test cowboy1-h1-test
 
 cowboy1-build:
 	$(gen_verbose) docker build -f Dockerfile.cowboy1 -t phoenix_h2load:cowboy1 .
@@ -112,12 +112,48 @@ cowboy2-h2-test: cowboy2-start
 		&& docker exec phoenix_h2load_cowboy2 priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h2 $(H2LOAD_ADDRESS) 29595 \
 		&& (docker stop phoenix_h2load_cowboy2 || true)
 
+cowboy2-pre-build:
+	$(gen_verbose) docker build -f Dockerfile.cowboy2-pre -t phoenix_h2load:cowboy2-pre .
+
+cowboy2-pre-create: cowboy2-pre-build
+	$(gen_verbose) (docker stop phoenix_h2load_cowboy2-pre || true) \
+		&& (docker rm -f phoenix_h2load_cowboy2-pre || true) \
+		&& docker create --name phoenix_h2load_cowboy2-pre phoenix_h2load:cowboy2-pre
+
+cowboy2-pre-start: cowboy2-pre-create
+	$(gen_verbose) docker start phoenix_h2load_cowboy2-pre \
+		&& sleep 5 # give everything time to start up
+
+cowboy2-pre-stop:
+	$(gen_verbose) docker stop phoenix_h2load_cowboy2-pre
+
+cowboy2-pre-h1-test: cowboy2-pre-start
+	$(gen_verbose) echo "\033[0;36m[cowboy 2.x] load testing cowboy (h1) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2-pre priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h1 $(H2LOAD_ADDRESS) 29593 \
+		&& echo "\033[0;36m[cowboy 2.x] load testing plug (h1) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2-pre priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h1 $(H2LOAD_ADDRESS) 29594 \
+		&& echo "\033[0;36m[cowboy 2.x] load testing phoenix (h1) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2-pre priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h1 $(H2LOAD_ADDRESS) 29595 \
+		&& (docker stop phoenix_h2load_cowboy2-pre || true)
+
+cowboy2-pre-h2-test: cowboy2-pre-start
+	$(gen_verbose) echo "\033[0;36m[cowboy 2.x] load testing cowboy (h2) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2-pre priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h2 $(H2LOAD_ADDRESS) 29593 \
+		&& echo "\033[0;36m[cowboy 2.x] load testing plug (h2) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2-pre priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h2 $(H2LOAD_ADDRESS) 29594 \
+		&& echo "\033[0;36m[cowboy 2.x] load testing phoenix (h2) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2-pre priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h2 $(H2LOAD_ADDRESS) 29595 \
+		&& (docker stop phoenix_h2load_cowboy2-pre || true)
+
 clean:: clean-docker
 
 clean-docker:
 	$(gen_verbose) (docker stop phoenix_h2load_cowboy1 || true) \
 		&& (docker stop phoenix_h2load_cowboy2 || true) \
+		&& (docker stop phoenix_h2load_cowboy2-pre || true) \
 		&& (docker rm -f phoenix_h2load_cowboy1 || true) \
 		&& (docker rm -f phoenix_h2load_cowboy2 || true) \
+		&& (docker rm -f phoenix_h2load_cowboy2-pre || true) \
 		&& (docker rmi phoenix_h2load:cowboy1 || true) \
-		&& (docker rmi phoenix_h2load:cowboy2 || true)
+		&& (docker rmi phoenix_h2load:cowboy2 || true) \
+		&& (docker rmi phoenix_h2load:cowboy2-pre || true)
