@@ -87,4 +87,4 @@ COPY src src
 COPY mix.exs mix.lock mix-cowboy1.lock ./
 RUN mix do deps.get, deps.compile, compile
 
-CMD ["mix", "phx.server"]
+CMD ["elixir", "--erl", "+K true", "-S", "mix", "phx.server"]
