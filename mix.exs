@@ -9,7 +9,8 @@ defmodule PhoenixH2load.Mixfile do
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
-      deps: deps()
+      deps: deps(),
+      lockfile: lockfile()
     ]
   end
 
@@ -31,10 +32,23 @@ defmodule PhoenixH2load.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
+    cowboy_version =
+      case System.get_env("COWBOY_VERSION") do
+        "1" <> _ -> {:cowboy, "~> 1.0"}
+        _ -> {:cowboy, github: "ninenines/cowboy", override: true}
+      end
     [
-      {:phoenix, github: "phoenixframework/phoenix", branch: "gr-cowboy2"},
+      cowboy_version,
+      {:phoenix, github: "phoenixframework/phoenix", branch: "gr-cowboy2", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:gettext, "~> 0.13"}
     ]
+  end
+
+  defp lockfile() do
+    case System.get_env("COWBOY_VERSION") do
+      "1" <> _ -> "mix-cowboy1.lock"
+      _ -> "mix.lock"
+    end
   end
 end

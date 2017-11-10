@@ -6,7 +6,14 @@
 use Mix.Config
 
 # Configures the endpoint
+handler =
+  case System.get_env("COWBOY_VERSION") do
+    "1" <> _ -> Phoenix.Endpoint.CowboyHandler
+    _ -> Phoenix.Endpoint.Cowboy2Handler
+  end
+
 config :phoenix_h2load, PhoenixH2loadWeb.Endpoint,
+  handler: handler,
   url: [host: "localhost"],
   secret_key_base: "hx6fx/3DMzG1kL3U+HL5mmnGWtoULk8qALWp3mfpiN0JtF//XKTDr7NiPMCxap32",
   render_errors: [view: PhoenixH2loadWeb.ErrorView, accepts: ~w(json)],

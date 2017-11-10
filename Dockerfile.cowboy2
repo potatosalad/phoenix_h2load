@@ -1,0 +1,90 @@
+FROM bitwalker/alpine-elixir:1.5.2
+
+ENV TERM=xterm
+
+## Option 1: build nghttp2 manually (with --interval support)
+
+# # Add dependencies
+# RUN apk --no-cache upgrade \
+#     && apk add --no-cache \
+#       autoconf \
+#       automake \
+#       bash \
+#       bc \
+#       boost \
+#       boost-dev \
+#       boost-thread \
+#       build-base \
+#       c-ares \
+#       c-ares-dev \
+#       ca-certificates \
+#       curl \
+#       git \
+#       jansson \
+#       jansson-dev \
+#       libev \
+#       libev-dev \
+#       libtool \
+#       libxml2 \
+#       libxml2-dev \
+#       ncurses-dev \
+#       openssh \
+#       openssl \
+#       openssl-dev \
+#       pcre \
+#       unzip \
+#       vim \
+#       zlib-dev \
+#     # Update ca certificates
+#     && update-ca-certificates --fresh
+
+# RUN git clone https://github.com/potatosalad/nghttp2.git \
+#     && cd nghttp2 \
+#     && git checkout cowboy2 \
+#     && git submodule update --init \
+#     && autoreconf -i \
+#     && automake \
+#     && autoconf \
+#     && ./configure \
+#          --enable-app \
+#          --disable-silent-rules \
+#          --disable-python-bindings \
+#          --enable-asio-lib \
+#          --with-boost \
+#          --without-jemalloc \
+#     && make -j8
+
+## Option 2: use edge version of nghttp2 (without --interval support)
+
+# Add dependencies
+RUN apk --no-cache upgrade \
+    && apk add --no-cache \
+      bash \
+      bc \
+      build-base \
+      ca-certificates \
+      curl \
+      git \
+      nghttp2@edge \
+      nghttp2-libs@edge \
+      openssh \
+      openssl \
+      unzip \
+      vim \
+    # Update ca certificates
+    && update-ca-certificates --fresh
+
+# Install Hex+Rebar
+RUN mix local.hex --force \
+    && mix local.rebar --force
+
+ENV MIX_ENV=prod PORT=4000
+
+COPY config config
+COPY lib lib
+COPY priv priv
+COPY src src
+COPY mix.exs mix.lock mix-cowboy1.lock ./
+RUN mix do deps.get, deps.compile, compile
+
+CMD ["mix", "phx.server"]

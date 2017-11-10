@@ -1,0 +1,18 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+notifications:
+  email: false
+
+before_install:
+  - make cowboy1-build
+  - make cowboy2-build
+
+script:
+  - make cowboy1-h1-test
+  - make cowboy2-h1-test
+  - make cowboy2-h2-test

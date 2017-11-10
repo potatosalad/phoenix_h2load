@@ -5,7 +5,9 @@ defmodule PhoenixH2loadWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", PhoenixH2loadWeb do
+  scope "/", PhoenixH2loadWeb do
     pipe_through :api
+
+    get "/", HelloController, :get
   end
 end

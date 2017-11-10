@@ -1,0 +1,40 @@
+FROM bitwalker/alpine-elixir:1.5.2
+
+ENV TERM=xterm
+
+# Add dependencies
+RUN apk --no-cache upgrade \
+    && apk add --no-cache \
+      bash \
+      bc \
+      build-base \
+      ca-certificates \
+      curl \
+      git \
+      nghttp2@edge \
+      nghttp2-libs@edge \
+      openssh \
+      openssl \
+      unzip \
+      vim \
+    # Update ca certificates
+    && update-ca-certificates --fresh
+
+# Install Hex+Rebar
+RUN mix local.hex --force \
+    && mix local.rebar --force
+
+ENV MIX_ENV=prod PORT=29595 COWBOY_VERSION=1
+
+# EXPOSE 29593
+# EXPOSE 29594
+# EXPOSE 29595
+
+COPY config config
+COPY lib lib
+COPY priv priv
+COPY src src
+COPY mix.exs mix.lock mix-cowboy1.lock ./
+RUN mix do deps.get, deps.compile, compile
+
+CMD ["mix", "phx.server"]

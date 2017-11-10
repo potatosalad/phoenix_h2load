@@ -1,0 +1,14 @@
+/.git
+/_build
+/cover
+/deps
+/doc
+/priv/*.rrd
+/priv/*.rrd.gz
+/priv/*.sh
+!/priv/test.sh
+/priv/*.svg
+/test
+/tmp
+/erl_crash.dump
+*.ez
