@@ -3,8 +3,8 @@ BASEDIR := $(abspath $(CURDIR)/)
 
 # Configuration.
 
-H2LOAD_DURATION ?= 5s
-H2LOAD_WARM_UP_TIME ?= 1s
+H2LOAD_DURATION ?= 60s
+H2LOAD_WARM_UP_TIME ?= 5s
 H2LOAD_ADDRESS ?= "127.0.0.1"
 
 # Platform detection.
