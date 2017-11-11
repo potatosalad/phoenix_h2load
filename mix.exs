@@ -41,6 +41,11 @@ defmodule PhoenixH2load.Mixfile do
           {:cowboy, github: "ninenines/cowboy", override: true}
         ]
       end
+    extra_dependencies =
+      case System.get_env("H2O_VERSION") do
+        "2" <> _ -> [{:h2o, github: "potatosalad/erlang-h2o", ref: "178ae3f3515bb5f886847ca91b46194019d883e7"} | extra_dependencies]
+        _ -> extra_dependencies
+      end
     extra_dependencies ++ [
       {:phoenix, github: "phoenixframework/phoenix", branch: "gr-cowboy2", override: true},
       {:phoenix_pubsub, "~> 1.0"},

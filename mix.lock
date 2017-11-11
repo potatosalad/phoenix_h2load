@@ -2,6 +2,7 @@
   "cowboy": {:git, "https://github.com/ninenines/cowboy.git", "da304799fee8ac93ce83d9349bb8128af3985671", []},
   "cowlib": {:git, "https://github.com/ninenines/cowlib", "61821cee0e8272430c003cb2393244a836754b1a", [ref: "2.0.1"]},
   "gettext": {:hex, :gettext, "0.13.1", "5e0daf4e7636d771c4c71ad5f3f53ba09a9ae5c250e1ab9c42ba9edccc476263", [], [], "hexpm"},
+  "h2o": {:git, "https://github.com/potatosalad/erlang-h2o.git", "178ae3f3515bb5f886847ca91b46194019d883e7", [ref: "178ae3f3515bb5f886847ca91b46194019d883e7"]},
   "hpack": {:hex, :hpack_erl, "0.2.3", "17670f83ff984ae6cd74b1c456edde906d27ff013740ee4d9efaa4f1bf999633", [], [], "hexpm"},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [], [], "hexpm"},
   "phoenix": {:git, "https://github.com/phoenixframework/phoenix.git", "0e64e94ebf9b75a5eaf3cc02103a566a79a2117d", [branch: "gr-cowboy2"]},

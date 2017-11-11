@@ -12,6 +12,7 @@ defmodule PhoenixH2load.Application do
       event_manager(),
       ace_server(),
       cowboy_server(),
+      h2o_server(),
       worker(PhoenixH2load.PlugHandler, []),
       # Start the endpoint when the application starts
       supervisor(PhoenixH2loadWeb.Endpoint, []),
@@ -62,16 +63,6 @@ defmodule PhoenixH2load.Application do
       end
   end
 
-  @doc false
-  defp event_manager() do
-    local_name = :phoenix_h2load_event.manager()
-    {
-      local_name,
-      {:gen_event, :start_link, [{:local, local_name}]},
-      :permanent, 5000, :worker, [:gen_event]
-    }
-  end
-
   case System.get_env("COWBOY_VERSION") do
     "1" <> _ ->
       defp cowboy_server() do
@@ -108,6 +99,31 @@ defmodule PhoenixH2load.Application do
           ]},
           :permanent, :infinity, :supervisor, [:ranch_listener_sup]
         }
+      end
+  end
+
+  @doc false
+  defp event_manager() do
+    local_name = :phoenix_h2load_event.manager()
+    {
+      local_name,
+      {:gen_event, :start_link, [{:local, local_name}]},
+      :permanent, 5000, :worker, [:gen_event]
+    }
+  end
+
+  case System.get_env("H2O_VERSION") do
+    "2" <> _ ->
+      defp h2o_server() do
+        if Code.ensure_loaded?(:h2o) do
+          [PhoenixH2load.H2O.child_spec(PhoenixH2load.H2O, 29591, PhoenixH2load.H2OHandler, [])]
+        else
+          []
+        end
+      end
+    _ ->
+      defp h2o_server() do
+        []
       end
   end
 end
