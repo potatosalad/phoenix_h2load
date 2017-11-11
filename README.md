@@ -1,5 +1,7 @@
 # PhoenixH2load
 
+[![Build Status](https://travis-ci.org/potatosalad/phoenix_h2load.svg?branch=master)](https://travis-ci.org/potatosalad/phoenix_h2load)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
