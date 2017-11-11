@@ -155,6 +155,16 @@ cowboy2-pre-h2-test: cowboy2-pre-start
 		&& docker exec phoenix_h2load_cowboy2-pre priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h2 "http://$(H2LOAD_ADDRESS):29595/" \
 		&& (docker stop phoenix_h2load_cowboy2-pre || true)
 
+h2o-h1-test: cowboy2-start
+	$(gen_verbose) echo "\033[0;36m[h2o 2.x] load testing h2o (h1) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2 priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h1 "http://$(H2LOAD_ADDRESS):29591/" \
+		&& (docker stop phoenix_h2load_cowboy2 || true)
+
+h2o-h2-test: cowboy2-start
+	$(gen_verbose) echo "\033[0;36m[h2o 2.x] load testing h2o (h2) for $(H2LOAD_DURATION)\033[0m" \
+		&& docker exec phoenix_h2load_cowboy2 priv/test.sh $(H2LOAD_DURATION) $(H2LOAD_WARM_UP_TIME) h2 "http://$(H2LOAD_ADDRESS):29591/" \
+		&& (docker stop phoenix_h2load_cowboy2 || true)
+
 clean:: clean-docker
 
 clean-docker:
