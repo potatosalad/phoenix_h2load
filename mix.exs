@@ -32,14 +32,16 @@ defmodule PhoenixH2load.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    cowboy_version =
+    extra_dependencies =
       case System.get_env("COWBOY_VERSION") do
-        "1" <> _ -> {:cowboy, "~> 1.0"}
-        "2-pre" <> _ -> {:cowboy, github: "ninenines/cowboy", ref: "2.0.0-rc.1", override: true}
-        _ -> {:cowboy, github: "ninenines/cowboy", override: true}
+        "1" <> _ -> [{:cowboy, "~> 1.0"}]
+        "2-pre" <> _ -> [{:cowboy, github: "ninenines/cowboy", ref: "2.0.0-rc.1", override: true}]
+        _ -> [
+          {:ace, "~> 0.15"},
+          {:cowboy, github: "ninenines/cowboy", override: true}
+        ]
       end
-    [
-      cowboy_version,
+    extra_dependencies ++ [
       {:phoenix, github: "phoenixframework/phoenix", branch: "gr-cowboy2", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:gettext, "~> 0.13"}

@@ -1,9 +1,12 @@
-%{"cowboy": {:git, "https://github.com/ninenines/cowboy.git", "da304799fee8ac93ce83d9349bb8128af3985671", []},
+%{"ace": {:hex, :ace, "0.15.4", "7912ff8d5daf0c3edfb571bff6e4118e1498a339068dd9f4152d4d3c7ca63022", [], [{:hpack, "~> 0.2.3", [hex: :hpack_erl, repo: "hexpm", optional: false]}, {:raxx, "~> 0.14.1", [hex: :raxx, repo: "hexpm", optional: false]}], "hexpm"},
+  "cowboy": {:git, "https://github.com/ninenines/cowboy.git", "da304799fee8ac93ce83d9349bb8128af3985671", []},
   "cowlib": {:git, "https://github.com/ninenines/cowlib", "61821cee0e8272430c003cb2393244a836754b1a", [ref: "2.0.1"]},
   "gettext": {:hex, :gettext, "0.13.1", "5e0daf4e7636d771c4c71ad5f3f53ba09a9ae5c250e1ab9c42ba9edccc476263", [], [], "hexpm"},
+  "hpack": {:hex, :hpack_erl, "0.2.3", "17670f83ff984ae6cd74b1c456edde906d27ff013740ee4d9efaa4f1bf999633", [], [], "hexpm"},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [], [], "hexpm"},
   "phoenix": {:git, "https://github.com/phoenixframework/phoenix.git", "0e64e94ebf9b75a5eaf3cc02103a566a79a2117d", [branch: "gr-cowboy2"]},
   "phoenix_pubsub": {:hex, :phoenix_pubsub, "1.0.2", "bfa7fd52788b5eaa09cb51ff9fcad1d9edfeb68251add458523f839392f034c1", [], [], "hexpm"},
   "plug": {:git, "https://github.com/elixir-plug/plug.git", "5540b9d58ecdefc927e81c2ac49b40552201b3d7", []},
   "poison": {:hex, :poison, "3.1.0", "d9eb636610e096f86f25d9a46f35a9facac35609a7591b3be3326e99a0484665", [], [], "hexpm"},
-  "ranch": {:git, "https://github.com/ninenines/ranch", "55c2a9d623454f372a15e99721a37093d8773b48", [ref: "1.4.0"]}}
+  "ranch": {:git, "https://github.com/ninenines/ranch", "55c2a9d623454f372a15e99721a37093d8773b48", [ref: "1.4.0"]},
+  "raxx": {:hex, :raxx, "0.14.1", "07146ea7ee60d45c174605c501f854f1e57b9420fb39a90443417c77abeccf5a", [], [], "hexpm"}}

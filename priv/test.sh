@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 
-if [ $# -lt 5 ]; then
-	echo 1>&2 "$0: requires an DURATION, WARM_UP_TIME, TYPE=(h1|h2), HOST, and PORT argument"
+if [ $# -lt 4 ]; then
+	echo 1>&2 "$0: requires an DURATION, WARM_UP_TIME, TYPE=(h1|h2), and TARGET argument"
 	exit 2
 fi
 
 duration="$1"
 warm_up_time="$2"
 type="$3"
-host="$4"
-port="$5"
+target="$4"
 
 extra_args=""
 
@@ -27,4 +26,4 @@ ${extra_args} \
 --warm-up-time="${warm_up_time}" \
 --clients=100 \
 --requests=0 \
-"http://${host}:${port}/"
+"${target}" | awk '/progress: 100%/{y=1;next}y'
