@@ -4,7 +4,7 @@ rrdtool graph c2_h1_phoenix.req.svg \
 --width 600 \
 --height 200 \
 --start 00:00 \
---end start+59seconds \
+--end start+60seconds \
 --title 'c2_h1_phoenix' \
 --vertical-label 'requests per second' \
 --imgformat SVG \
@@ -13,10 +13,10 @@ rrdtool graph c2_h1_phoenix.req.svg \
 --upper-limit 70000 \
 --lower-limit 0 \
 --rigid \
-'DEF:error=c2_h1_phoenix.rrd:error:MAX:start=1510248465:end=1510248524:step=1' \
-'DEF:requests=c2_h1_phoenix.rrd:requests:MAX:start=1510248465:end=1510248524:step=1' \
-'SHIFT:error:-37665' \
-'SHIFT:requests:-37665' \
+'DEF:error=c2_h1_phoenix.rrd:error:MAX:start=1510521927:end=1510521987:step=1' \
+'DEF:requests=c2_h1_phoenix.rrd:requests:MAX:start=1510521927:end=1510521987:step=1' \
+'SHIFT:error:-51927' \
+'SHIFT:requests:-51927' \
 'CDEF:ln1=requests,requests,UNKN,IF' \
  \
 'TICK:error#e60073a0:1:  Error' \

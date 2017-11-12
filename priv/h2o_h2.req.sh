@@ -4,19 +4,19 @@ rrdtool graph h2o_h2.req.svg \
 --width 600 \
 --height 200 \
 --start 00:00 \
---end start+57seconds \
+--end start+59seconds \
 --title 'h2o_h2' \
 --vertical-label 'requests per second' \
 --imgformat SVG \
 --border 0 \
 --font DEFAULT:0:Consolas \
---upper-limit 140000 \
+--upper-limit 70000 \
 --lower-limit 0 \
 --rigid \
-'DEF:error=h2o_h2.rrd:error:MAX:start=1510247992:end=1510248049:step=1' \
-'DEF:requests=h2o_h2.rrd:requests:MAX:start=1510247992:end=1510248049:step=1' \
-'SHIFT:error:-37192' \
-'SHIFT:requests:-37192' \
+'DEF:error=h2o_h2.rrd:error:MAX:start=1510521207:end=1510521266:step=1' \
+'DEF:requests=h2o_h2.rrd:requests:MAX:start=1510521207:end=1510521266:step=1' \
+'SHIFT:error:-51207' \
+'SHIFT:requests:-51207' \
 'CDEF:ln1=requests,requests,UNKN,IF' \
  \
 'TICK:error#e60073a0:1:  Error' \

@@ -4,7 +4,7 @@ rrdtool graph c2_h1_plug.req.svg \
 --width 600 \
 --height 200 \
 --start 00:00 \
---end start+60seconds \
+--end start+59seconds \
 --title 'c2_h1_plug' \
 --vertical-label 'requests per second' \
 --imgformat SVG \
@@ -13,10 +13,10 @@ rrdtool graph c2_h1_plug.req.svg \
 --upper-limit 70000 \
 --lower-limit 0 \
 --rigid \
-'DEF:error=c2_h1_plug.rrd:error:MAX:start=1510248385:end=1510248445:step=1' \
-'DEF:requests=c2_h1_plug.rrd:requests:MAX:start=1510248385:end=1510248445:step=1' \
-'SHIFT:error:-37585' \
-'SHIFT:requests:-37585' \
+'DEF:error=c2_h1_plug.rrd:error:MAX:start=1510521859:end=1510521918:step=1' \
+'DEF:requests=c2_h1_plug.rrd:requests:MAX:start=1510521859:end=1510521918:step=1' \
+'SHIFT:error:-51859' \
+'SHIFT:requests:-51859' \
 'CDEF:ln1=requests,requests,UNKN,IF' \
  \
 'TICK:error#e60073a0:1:  Error' \

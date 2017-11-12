@@ -10,13 +10,13 @@ rrdtool graph c1_h1_cowboy.req.svg \
 --imgformat SVG \
 --border 0 \
 --font DEFAULT:0:Consolas \
---upper-limit 70000 \
+--upper-limit 140000 \
 --lower-limit 0 \
 --rigid \
-'DEF:error=c1_h1_cowboy.rrd:error:MAX:start=1510247371:end=1510247430:step=1' \
-'DEF:requests=c1_h1_cowboy.rrd:requests:MAX:start=1510247371:end=1510247430:step=1' \
-'SHIFT:error:-36571' \
-'SHIFT:requests:-36571' \
+'DEF:error=c1_h1_cowboy.rrd:error:MAX:start=1510525612:end=1510525671:step=1' \
+'DEF:requests=c1_h1_cowboy.rrd:requests:MAX:start=1510525612:end=1510525671:step=1' \
+'SHIFT:error:-55612' \
+'SHIFT:requests:-55612' \
 'CDEF:ln1=requests,requests,UNKN,IF' \
  \
 'TICK:error#e60073a0:1:  Error' \

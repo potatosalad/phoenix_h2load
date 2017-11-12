@@ -10,15 +10,15 @@ rrdtool graph c1_h1.svg \
 --imgformat SVG \
 --border 0 \
 --font DEFAULT:0:Consolas \
---upper-limit 70000 \
+--upper-limit 140000 \
 --lower-limit 0 \
 --rigid \
-'DEF:phxrequests=c1_h1_phoenix.rrd:requests:MAX:start=1510247527:end=1510247587:step=1' \
-'DEF:plgrequests=c1_h1_plug.rrd:requests:MAX:start=1510247448:end=1510247507:step=1' \
-'DEF:cowrequests=c1_h1_cowboy.rrd:requests:MAX:start=1510247371:end=1510247430:step=1' \
-'SHIFT:phxrequests:-36728' \
-'SHIFT:plgrequests:-36649' \
-'SHIFT:cowrequests:-36571' \
+'DEF:phxrequests=c1_h1_phoenix.rrd:requests:MAX:start=1510522581:end=1510522641:step=1' \
+'DEF:plgrequests=c1_h1_plug.rrd:requests:MAX:start=1510522513:end=1510522572:step=1' \
+'DEF:cowrequests=c1_h1_cowboy.rrd:requests:MAX:start=1510525612:end=1510525671:step=1' \
+'SHIFT:phxrequests:-52582' \
+'SHIFT:plgrequests:-52514' \
+'SHIFT:cowrequests:-55613' \
 'CDEF:phxln=phxrequests,phxrequests,UNKN,IF' \
 'CDEF:plgln=plgrequests,plgrequests,UNKN,IF' \
 'CDEF:cowln=cowrequests,cowrequests,UNKN,IF' \

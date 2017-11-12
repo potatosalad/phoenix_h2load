@@ -4,7 +4,7 @@ rrdtool graph c2_h1_cowboy.req.svg \
 --width 600 \
 --height 200 \
 --start 00:00 \
---end start+59seconds \
+--end start+60seconds \
 --title 'c2_h1_cowboy' \
 --vertical-label 'requests per second' \
 --imgformat SVG \
@@ -13,10 +13,10 @@ rrdtool graph c2_h1_cowboy.req.svg \
 --upper-limit 70000 \
 --lower-limit 0 \
 --rigid \
-'DEF:error=c2_h1_cowboy.rrd:error:MAX:start=1510248271:end=1510248330:step=1' \
-'DEF:requests=c2_h1_cowboy.rrd:requests:MAX:start=1510248271:end=1510248330:step=1' \
-'SHIFT:error:-37471' \
-'SHIFT:requests:-37471' \
+'DEF:error=c2_h1_cowboy.rrd:error:MAX:start=1510521779:end=1510521839:step=1' \
+'DEF:requests=c2_h1_cowboy.rrd:requests:MAX:start=1510521779:end=1510521839:step=1' \
+'SHIFT:error:-51779' \
+'SHIFT:requests:-51779' \
 'CDEF:ln1=requests,requests,UNKN,IF' \
  \
 'TICK:error#e60073a0:1:  Error' \

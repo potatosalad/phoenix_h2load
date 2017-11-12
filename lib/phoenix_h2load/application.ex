@@ -69,6 +69,7 @@ defmodule PhoenixH2load.Application do
         dispatch = :cowboy_router.compile([{:_, [{:_, PhoenixH2load.CowboyHandler, []}]}])
         ref = PhoenixH2load.CowboyHandler.HTTP
         transport_options = [
+          max_connections: 16_384,
           port: 29593
         ]
         protocol_options = [
